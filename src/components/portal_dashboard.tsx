@@ -3,8 +3,6 @@ import AddMemberForm from './addmemberform';
 import TableSection from './table_section';
 
 
-
-
 export default function PortalDashboard() {
 
     return (
