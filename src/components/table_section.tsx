@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
+// import { useEffect, useState } from "react"
+import  Member from './portal_dashboard';
+// import axios from "axios"
 import {
   Select,
   SelectContent,
@@ -18,6 +19,10 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
+interface TableSectionProps {
+  members: Member[];
+}
+
 interface Member {
   id: string; // UUID-style string
   status: 'new' | 'pending' | 'approved' | 'refer'; // ENUM from DB
@@ -33,14 +38,14 @@ interface Member {
   emails: string;
 }
 
-export default function TableSection() {
-  const [members, setMembers] = useState<Member[]>([])
+export default function TableSection({ members }: TableSectionProps) {
+  // const [member, setMembers] = useState<Member[]>([])   
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/members")
-      .then(res => setMembers(res.data))
-      .catch(err => console.error("Failed to fetch members:", err))
-  }, [])
+  // useEffect(() => {
+  //   axios.get("http://localhost:5000/api/members")
+  //     .then(res => setMembers(res.data))
+  //     .catch(err => console.error("Failed to fetch members:", err))
+  // }, [])
 
   return (
     <div className="w-full max-w-4xl mx-auto bg-white p-4 rounded-lg shadow">
@@ -95,7 +100,7 @@ export default function TableSection() {
                       Choose File
                     </label>
                     <input id={`file-upload-${member.id}`} type="file" className="sr-only" />
-                    <span className="text-sm text-gray-500">Inserted</span>
+                    <span className="text-sm text-gray-500">Upload File</span>
                   </div>
                 </TableCell>
                 <TableCell>
