@@ -31,7 +31,7 @@ export default function AddMemberForm({ onMemberAdded }: AddMemberFormProps) {
         state: formData.state,
         status: "new",
         applicationDocStatus: "",
-        calendarDate: "", // Default to today
+        calendarDate: null, // Default to today
         memberType: "",
         comments: "",
       });
