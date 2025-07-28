@@ -4,14 +4,14 @@ import axios from 'axios';
 import Header from '../components/header';
 import AddMemberForm from './addmemberform';
 import TableSection from './table_section';
-import { API_BASE_URL } from '@/config';
 
 export default function PortalDashboard() {
   const [members, setMembers] = useState([]);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchMembers = async () => {
     try {
-      const res = await axios.get(`${API_BASE_URL}/api/members`);
+      const res = await axios.get(`${API_URL}/api/members`);
       setMembers(res.data.members); // ✅ Only set the array, not the entire object
     } catch (err) {
       console.error('Failed to fetch members:', err);

@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "@/config";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -22,6 +21,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   // Try to fetch user from localStorage on mount
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -36,7 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // 🔐 Login and store token + user info
   const login = async (email: string, password: string) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/api/users/login`, {
+    const response = await axios.post(`${API_URL}/api/users/login`, {
       email,
       password,
     });

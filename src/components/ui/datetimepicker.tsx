@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner"; // optional if you use toasts
-import { API_BASE_URL } from "@/config";
 
 export function DateTimePickerWithValidation({
   memberId,
@@ -20,11 +19,12 @@ export function DateTimePickerWithValidation({
   const [time, setTime] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const API_URL = import.meta.env.VITE_API_URL;
 
     React.useEffect(() => {
     const fetchAppointmentDate = async () => {
         try {
-        const res = await fetch(`${API_BASE_URL}/api/members/get-appointment/${memberId}`);
+        const res = await fetch(`${API_URL}/api/members/get-appointment/${memberId}`);
         const data = await res.json();
         console.log("Member ID:", memberId);
 
@@ -66,7 +66,7 @@ export function DateTimePickerWithValidation({
 
     setIsLoading(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/members/update-appointment`, {
+      const res = await fetch(`${API_URL}/api/members/update-appointment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

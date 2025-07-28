@@ -19,7 +19,6 @@ import {
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react";
 import { DateTimePickerWithValidation } from "@/components/ui/datetimepicker";
-import { API_BASE_URL } from '@/config';
 
 interface TableSectionProps {
   members: Member[];
@@ -42,11 +41,13 @@ interface Member {
 
 export default function TableSection({ members, refetchMembers }: TableSectionProps) {
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     if (!Array.isArray(members)) return;
 
     members.forEach(member => {
-      fetch(`${API_BASE_URL}/api/documents/${member.memberId}`)
+      fetch(`${API_URL}/api/documents/${member.memberId}`)
         .then(res => res.json())
         .then(data => {
           if (data?.filename) {
@@ -103,7 +104,7 @@ export default function TableSection({ members, refetchMembers }: TableSectionPr
     console.log("Member ID:", memberId);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/documents/upload`, {
+      const response = await fetch(`${API_URL}/api/documents/upload`, {
         method: "POST",
         body: formData,
       });
@@ -128,7 +129,7 @@ export default function TableSection({ members, refetchMembers }: TableSectionPr
 
   const handleFileDelete = async (memberId: string) => {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/documents/delete`, {
+    const res = await fetch(`${API_URL}/api/documents/delete`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -156,7 +157,7 @@ export default function TableSection({ members, refetchMembers }: TableSectionPr
   const handleCommentUpload = async (memberId: string, comment: string) => {
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/members/comment`, {
+      const response = await fetch(`${API_URL}/api/members/comment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -187,7 +188,7 @@ export default function TableSection({ members, refetchMembers }: TableSectionPr
   
   const handleMemberTypeChange = async (memberId: string, type: string) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/members/member-type`, {
+      const res = await fetch(`${API_URL}/api/members/member-type`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -210,7 +211,7 @@ export default function TableSection({ members, refetchMembers }: TableSectionPr
 
   const handleStatusUpdate = async (memberId: string, status: "approved" | "rejected") => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/members/status`, {
+      const res = await fetch(`${API_URL}/api/members/status`, {
         method: "POST", // or PUT if you're using REST conventions
         headers: {
           "Content-Type": "application/json",
@@ -232,7 +233,7 @@ export default function TableSection({ members, refetchMembers }: TableSectionPr
 
   const handleStatusUpdaterefer = async (memberId: string, status: string) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/members/status`, {
+      const res = await fetch(`${API_URL}/api/members/status`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ memberId, status }),
@@ -261,7 +262,7 @@ export default function TableSection({ members, refetchMembers }: TableSectionPr
     }
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/members?state=${state}`);
+      const res = await fetch(`${API_URL}/api/members?state=${state}`);
       const data = await res.json();
       const safeMembers = Array.isArray(data.members) ? data.members : [];
 

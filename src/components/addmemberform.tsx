@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { API_BASE_URL } from "@/config";
 
 interface AddMemberFormProps {
   onMemberAdded: () => void;
@@ -18,13 +17,15 @@ export default function AddMemberForm({ onMemberAdded }: AddMemberFormProps) {
     state: "",
   });
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`${API_BASE_URL}/api/members`, {
+      await axios.post(`${API_URL}/api/members`, {
         name: formData.name,
         memberId: formData.memberId,
         state: formData.state,
