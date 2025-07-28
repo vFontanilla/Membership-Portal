@@ -28,9 +28,9 @@ export default function AddMemberForm({ onMemberAdded }: AddMemberFormProps) {
         memberId: formData.memberId,
         state: formData.state,
         status: "new",
-        applicationDocStatus: "Not Submitted",
-        calendarDate: new Date().toISOString().split("T")[0], // Default to today
-        memberType: "member",
+        applicationDocStatus: "",
+        calendarDate: "", // Default to today
+        memberType: "",
         comments: "",
       });
       onMemberAdded(); // Refresh members
