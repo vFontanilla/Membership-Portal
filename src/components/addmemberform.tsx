@@ -32,7 +32,7 @@ export default function AddMemberForm({ onMemberAdded }: AddMemberFormProps) {
         status: "new",
         applicationDocStatus: "",
         calendarDate: null, // Default to today
-        memberType: "",
+        memberType: null,
         comments: "",
       });
       onMemberAdded(); // Refresh members
