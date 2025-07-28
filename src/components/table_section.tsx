@@ -425,7 +425,7 @@ export default function TableSection({ members, refetchMembers }: TableSectionPr
                   )}
                 </TableCell>
                 <TableCell className="text-right flex flex-col md:flex-row items-end md:items-center justify-end space-y-2 md:space-y-0 md:space-x-2">
-                <Select value={member.memberType} onValueChange={(value) => handleMemberTypeChange(member.memberId, value)}>
+                <Select value={member.memberType ?? undefined} onValueChange={(value) => handleMemberTypeChange(member.memberId, value)}>
                   <SelectTrigger className="w-[160px]">
                     <SelectValue placeholder="Select Member Type" />
                   </SelectTrigger>
