@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { API_BASE_URL } from "@/config";
 
 interface AddMemberFormProps {
   onMemberAdded: () => void;
@@ -23,7 +24,7 @@ export default function AddMemberForm({ onMemberAdded }: AddMemberFormProps) {
 
   const handleSubmit = async () => {
     try {
-      await axios.post("http://localhost:5000/api/members", {
+      await axios.post(`${API_BASE_URL}/api/members`, {
         name: formData.name,
         memberId: formData.memberId,
         state: formData.state,

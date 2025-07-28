@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner"; // optional if you use toasts
+import { API_BASE_URL } from "@/config";
 
 export function DateTimePickerWithValidation({
   memberId,
@@ -23,7 +24,7 @@ export function DateTimePickerWithValidation({
     React.useEffect(() => {
     const fetchAppointmentDate = async () => {
         try {
-        const res = await fetch(`http://localhost:5000/api/members/get-appointment/${memberId}`);
+        const res = await fetch(`${API_BASE_URL}/api/members/get-appointment/${memberId}`);
         const data = await res.json();
         console.log("Member ID:", memberId);
 
@@ -65,7 +66,7 @@ export function DateTimePickerWithValidation({
 
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/members/update-appointment", {
+      const res = await fetch(`${API_BASE_URL}/api/members/update-appointment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

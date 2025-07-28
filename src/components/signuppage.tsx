@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { API_BASE_URL } from "@/config";
 
 export default function Signup() {
   const [passwordStrength, setPasswordStrength] = useState("");
@@ -62,7 +63,7 @@ export default function Signup() {
   }
 
   try {
-    const response = await fetch("http://localhost:5000/api/users/signup", {
+    const response = await fetch(`${API_BASE_URL}/api/users/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: username, email, password, role }),
